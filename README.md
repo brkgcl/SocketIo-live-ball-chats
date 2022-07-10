@@ -1,2 +1,2 @@
 # SocketIo-live-ball-chats
-Socket.io chat aplication
+Socket.io chat balls aplication
