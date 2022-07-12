@@ -1,7 +1,10 @@
 doctype html
 html
   head
+    meta(charset='UTF-8')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+
+  body(ng-app="app", ng-cloak)
     block content
