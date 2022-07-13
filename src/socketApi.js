@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
             },
             color: randomColor()
 
-        }
+        };
 
         const userData = Object.assign(data, defaultData);
         users[socket.id] = userData;
@@ -50,6 +50,10 @@ io.on('connection', (socket) => {
             y: data.y
         });
 
+    });
+
+    socket.on('newMessage', (data) => {
+        socket.broadcast.emit('newMessage', data );
     })
 });
 
