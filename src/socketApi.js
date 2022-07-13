@@ -33,6 +33,18 @@ io.on('connection', (socket) => {
 
         console.log(users);
     });
+
+    socket.on('animate', (data) => {
+        users[socket.id].position.x = data.x;
+        users[socket.id].position.y = data.y;
+
+        socket.broadcast.emit('animate', {
+            socketId: socket.id,
+            x: data.x,
+            y: data.y
+        });
+
+    })
 });
 
 module.exports = socketApi
