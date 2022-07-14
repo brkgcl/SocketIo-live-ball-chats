@@ -19,6 +19,15 @@ app.controller('indexController', ['$scope', 'indexFactory',($scope, indexFactor
         });
     };
 
+    function showBuble(id, message){
+        $('#'+ id).find('.message').show().html(message);
+
+        setTimeout(() => {
+            $('#'+ id).find('.message').hide();
+        }, 2000);
+
+    }; 
+
     function initSocket(username) {
         const connectionOptions = {
             reconnectionAttempts: 3,
@@ -45,6 +54,7 @@ app.controller('indexController', ['$scope', 'indexFactory',($scope, indexFactor
 
                     $scope.messages.push(messageData);
                     $scope.players[data.id] = data;
+                    scrollTop();
                     $scope.$apply();
                 });
 
@@ -58,6 +68,7 @@ app.controller('indexController', ['$scope', 'indexFactory',($scope, indexFactor
                     };
                     $scope.messages.push(messageData);
                     delete $scope.players[data.id];
+                    scrollTop();
                     $scope.$apply();
                 });
 
@@ -71,6 +82,7 @@ app.controller('indexController', ['$scope', 'indexFactory',($scope, indexFactor
                 socket.on('newMessage', (message) => {
                     $scope.messages.push(message);
                     $scope.$apply();
+                    showBuble(message.socketId, message.text);
                     scrollTop();
                 })
 
@@ -107,6 +119,7 @@ app.controller('indexController', ['$scope', 'indexFactory',($scope, indexFactor
 
                     socket.emit('newMessage', messageData );
 
+                    showBuble(socket.id, message);
                     scrollTop();
                     
                 };
